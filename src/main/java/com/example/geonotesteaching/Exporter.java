@@ -1,1 +1,4 @@
-package com.example.geonotesteaching; public sealed interface Exporter permits JsonExporter, Timeline.Render { String export(); }
+package com.example.geonotesteaching;
+public sealed interface Exporter permits AbstractExporter, JsonExporter, Timeline.Render {
+    String export();
+}

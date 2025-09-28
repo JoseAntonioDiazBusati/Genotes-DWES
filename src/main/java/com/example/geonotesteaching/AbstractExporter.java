@@ -1,1 +1,4 @@
-package com.example.geonotesteaching; public abstract class AbstractExporter implements Exporter { public abstract String export(); }
+package com.example.geonotesteaching;
+public abstract sealed class AbstractExporter implements Exporter permits JsonExporter, Timeline.Render {
+    public abstract String export();
+}
