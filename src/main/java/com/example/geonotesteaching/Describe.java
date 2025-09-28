@@ -8,6 +8,8 @@ final class Describe {
             case Audio audio when audio.duration() > 300 -> "🎵 Audio largo";
             case Audio audio -> "🎵 Audio";
             case Link l -> "🔗 %s".formatted((l.label() == null || l.label().isEmpty()) ? l.url() : l.label());
+            case Video v when v.seconds() > 120-> "￿ Vídeo largo";
+            case Video v-> "￿ Vídeo";
         };
     }
 }

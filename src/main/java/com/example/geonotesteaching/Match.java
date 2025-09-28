@@ -1,1 +1,8 @@
-package com.example.geonotesteaching; final class Match { public static boolean isInArea(GeoPoint p, GeoArea a){ return p.lat()>=a.topLeft().lat() && p.lat()<=a.bottomRight().lat() && p.lon()>=a.topLeft().lon() && p.lon()<=a.bottomRight().lon(); } }
+package com.example.geonotesteaching;
+
+final class Match {
+
+    public static boolean isInArea(GeoPoint p, GeoArea a){
+        return p.lat()>=a.topLeft().lat() && p.lat()<=a.bottomRight().lat() && p.lon()>=a.topLeft().lon() && p.lon()<=a.bottomRight().lon();
+    }
+}

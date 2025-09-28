@@ -1,1 +1,7 @@
-package com.example.geonotesteaching; public record GeoArea(GeoPoint topLeft, GeoPoint bottomRight) { }
+package com.example.geonotesteaching;
+
+public record GeoArea(
+        GeoPoint topLeft,
+        GeoPoint bottomRight) {
+
+}
