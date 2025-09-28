@@ -24,7 +24,7 @@ final class Timeline {
                           "createdAt": "%s"
                         }
                         """.formatted(
-                            note.id(), note.title(), note.content(),
+                            note.id(), note.title().replace("\",","///"), note.content().replace("\",","///"),
                             note.location().lat(), note.location().lon(),
                             note.createdAt()))
                 .sorted(Comparator.reverseOrder())
