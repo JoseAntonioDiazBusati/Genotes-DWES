@@ -1,6 +1,18 @@
 package com.example.geonotesteaching;
 
 import java.util.Objects;
+/**
+ * Ventajas de usar records:
+ * - Menos código repetitivo (equals, hashCode, toString y getters son automáticos).
+ * - Representan claramente "datos inmutables".
+ * - Código más legible y fácil de mantener.
+ *
+ * Cuándo no usar records:
+ * - Si necesitas mutabilidad (los fields en records son finales).
+ * - Si la clase requiere jerarquía de herencia (los records no pueden extender de otra clase, solo implementar interfaces).
+ * - Si necesitas mucha lógica interna más allá de representar datos.
+ */
+
 
 public class LegacyPoint {
     private double lat;
