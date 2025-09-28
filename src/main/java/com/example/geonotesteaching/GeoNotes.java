@@ -84,5 +84,7 @@ public class GeoNotes {
         timeline.addNote(new Note(noteCounter++, "Cádiz", "Playita", new GeoPoint(36.5297, -6.2927), Instant.now(), new Photo("u", 2000, 1000)));
         timeline.addNote(new Note(noteCounter++, "Sevilla", "Triana", new GeoPoint(37.3826, -5.9963), Instant.now(), new Audio("a", 320)));
         timeline.addNote(new Note(noteCounter++, "Córdoba", "Mezquita", new GeoPoint(37.8790, -4.7794), Instant.now(), new Link("http://cordoba", "Oficial")));
+        // Ejemplo de Video aniadido
+        timeline.addNote(new Note(noteCounter++, "Málaga", "Vídeo playa", new GeoPoint(36.7213, -4.4214), Instant.now(), new Video("v", 1920, 1080, 150)));
     }
 }
