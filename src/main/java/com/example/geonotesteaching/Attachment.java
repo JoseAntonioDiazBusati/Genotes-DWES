@@ -1,0 +1,1 @@
+package com.example.geonotesteaching; public sealed interface Attachment permits Photo, Audio, Link { }

@@ -1,0 +1,1 @@
+package com.example.geonotesteaching; public abstract class AbstractExporter implements Exporter { public abstract String export(); }

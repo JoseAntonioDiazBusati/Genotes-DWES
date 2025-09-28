@@ -1,0 +1,1 @@
+package com.example.geonotesteaching; public record Link(String url, String label) implements Attachment { }

@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+}
+
+application {
+    mainClass = 'com.example.geonotesteaching.GeoNotes'
+}
+
+tasks.register('examples', JavaExec) {
+    group = 'application'
+    description = 'Ejecuta un flujo de ejemplo (opcional)'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.geonotesteaching.GeoNotes'
+    args = ['examples']
+}

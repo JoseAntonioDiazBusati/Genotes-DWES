@@ -1,0 +1,1 @@
+package com.example.geonotesteaching; public sealed interface Exporter permits JsonExporter, Timeline.Render { String export(); }
