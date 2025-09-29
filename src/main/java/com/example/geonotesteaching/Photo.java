@@ -1,4 +1,4 @@
-package com.example.geonotesteaching.Attachment;
+package com.example.geonotesteaching;
 
 public record Photo(
         String url,
