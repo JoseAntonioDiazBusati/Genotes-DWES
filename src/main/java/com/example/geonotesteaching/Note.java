@@ -1,6 +1,6 @@
 package com.example.geonotesteaching;
 
-import com.example.geonotesteaching.Attachment.Attachment;
+import com.example.geonotesteaching.Attachment;
 
 import java.time.Instant;
 
