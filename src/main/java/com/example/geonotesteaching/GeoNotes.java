@@ -26,6 +26,7 @@ public class GeoNotes {
                     case 3 -> filterNotes();
                     case 4 -> exportNotesToJson();
                     case 5 -> running = false;
+                    case 6 -> getLatestNotes();
                     default -> System.out.println("❌ Opción no válida. Inténtalo de nuevo.");
                 }
             } catch (NumberFormatException e) {
@@ -42,6 +43,7 @@ public class GeoNotes {
         System.out.println("3. Filtrar notas por palabra clave");
         System.out.println("4. Exportar notas a JSON (Text Blocks)");
         System.out.println("5. Salir");
+        System.out.println("6. Listar ultimas N");
         System.out.print("Elige una opción: ");
     }
 
@@ -80,6 +82,20 @@ public class GeoNotes {
         String json = renderer.export();
         System.out.println("\n--- Exportando notas a JSON ---");
         System.out.println(json);
+    }
+
+    private static void getLatestNotes() {
+        try {
+            System.out.println("Introduce el número de notas que deseas ver: ");
+            int choice = Integer.parseInt(scanner.nextLine().trim());
+            var latestNotes = timeline.latest(choice);
+
+            for (Note note : latestNotes) {
+                System.out.println(note.toString());
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Entrada no válida. Por favor, ingresa un número.");
+        }
     }
 
     private static void seedExamples() {

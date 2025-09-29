@@ -34,4 +34,12 @@ final class Timeline {
                     """.formatted(notesList);
         }
     }
+    public java.util.List<Note> latest(int n) {
+        return getNotes()
+                .values().stream()
+                .sorted(java.util.Comparator.comparing(Note::createdAt).reversed())
+                .limit(n)
+                .toList();
+    }
+
 }
