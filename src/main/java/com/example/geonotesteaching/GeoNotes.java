@@ -1,5 +1,10 @@
 package com.example.geonotesteaching;
 
+import com.example.geonotesteaching.Attachment.Audio;
+import com.example.geonotesteaching.Attachment.Link;
+import com.example.geonotesteaching.Attachment.Photo;
+import com.example.geonotesteaching.Attachment.Video;
+
 import java.time.Instant;
 import java.util.Scanner;
 

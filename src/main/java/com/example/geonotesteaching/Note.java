@@ -1,5 +1,7 @@
 package com.example.geonotesteaching;
 
+import com.example.geonotesteaching.Attachment.Attachment;
+
 import java.time.Instant;
 
 /* Un 'record' para la nota, que incluye un campo de tipo 'sealed interface'.

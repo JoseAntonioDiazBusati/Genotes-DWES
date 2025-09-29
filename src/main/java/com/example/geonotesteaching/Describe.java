@@ -1,5 +1,7 @@
 package com.example.geonotesteaching;
 
+import com.example.geonotesteaching.Attachment.*;
+
 final class Describe {
     public static String describeAttachment(Attachment a) {
         return switch (a) {

@@ -1,4 +1,4 @@
-package com.example.geonotesteaching;
+package com.example.geonotesteaching.Attachment;
 
 public record Video(
         String url,

@@ -1,4 +1,4 @@
-package com.example.geonotesteaching;
+package com.example.geonotesteaching.Attachment;
 
 public record Audio(
         String url,
