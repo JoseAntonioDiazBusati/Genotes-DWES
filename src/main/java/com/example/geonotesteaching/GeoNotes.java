@@ -27,6 +27,7 @@ public class GeoNotes {
                     case 4 -> exportNotesToJson();
                     case 5 -> running = false;
                     case 6 -> getLatestNotes();
+                    case 7 -> ShowMd();
                     default -> System.out.println("❌ Opción no válida. Inténtalo de nuevo.");
                 }
             } catch (NumberFormatException e) {
@@ -44,6 +45,7 @@ public class GeoNotes {
         System.out.println("4. Exportar notas a JSON (Text Blocks)");
         System.out.println("5. Salir");
         System.out.println("6. Listar ultimas N");
+        System.out.println("7. Exportar Markdown");
         System.out.print("Elige una opción: ");
     }
 
@@ -97,6 +99,17 @@ public class GeoNotes {
             System.out.println("❌ Entrada no válida. Por favor, ingresa un número.");
         }
     }
+
+    private static void ShowMd() {
+        if (timeline.getNotes().isEmpty()) {
+            System.out.println("No hay Md creados.");
+            return;
+        }
+        Note nota = timeline.getNote(noteCounter);
+        MarkdownExporter objetoMd = new MarkdownExporter(nota, nota.location());
+        System.out.println("Md: " + objetoMd.export());
+    }
+
 
     private static void seedExamples() {
         timeline.addNote(new Note(noteCounter++, "Cádiz", "Playita", new GeoPoint(36.5297, -6.2927), Instant.now(), new Photo("u", 2000, 1000)));
