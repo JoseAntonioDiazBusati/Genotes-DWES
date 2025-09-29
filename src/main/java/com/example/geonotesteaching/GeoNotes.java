@@ -77,6 +77,8 @@ public class GeoNotes {
             var note = new Note(noteCounter++, title, content, geoPoint, Instant.now(), null);
             timeline.addNote(note); // Guardar en el timeline
             System.out.println("✅ Nota creada con éxito.");
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Entrada no válida. Por favor, ingresa un número.");
         } catch (IllegalArgumentException e) {
             // Captura error si las coordenadas no son válidas
             System.out.println("❌ Error: " + e.getMessage());
