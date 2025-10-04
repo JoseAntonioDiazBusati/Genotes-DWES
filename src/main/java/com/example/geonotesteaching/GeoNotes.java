@@ -39,12 +39,14 @@ public class GeoNotes {
                     case 8 -> running = false;    // Salir del programa
                     case 5 -> getLatestNotes();   // Listar últimas N notas
                     case 6 -> ShowMd();           // Exportar a formato Markdown
-                    case 7 -> where();            // Clasificar ubicación (GeoPoint)
+                    case 7 -> where(timeline,scanner);    // Filtrado de notas (timeline,scanner)
                     default -> System.out.println("❌ Opción no válida. Inténtalo de nuevo.");
                 }
             } catch (NumberFormatException e) {
                 // Si el usuario introduce algo que no es número
                 System.out.println("❌ Entrada no válida. Por favor, ingresa un número.");
+            }  catch (Exception e) {
+                System.out.println("❌ Ocurrió un error inesperado: " + e.getMessage());
             }
         }
         System.out.println("¡Gracias por usar GeoNotes! 👋");
@@ -52,22 +54,22 @@ public class GeoNotes {
 
     // Muestra las opciones del menú en pantalla
     private static void printMenu() {
-        System.out.println("\n--- Menú ---");
+        System.out.println("\n--- Menu ---");
         System.out.println("1. Crear una nueva nota");
         System.out.println("2. Listar todas las notas");
         System.out.println("3. Filtrar notas por palabra clave");
         System.out.println("4. Exportar notas a JSON (Text Blocks)");
         System.out.println("5. Listar ultimas N");
         System.out.println("6. Exportar Markdown");
-        System.out.println("7. Mostrar  el where");
+        System.out.println("7. Mostrar  ultimas notas");
         System.out.println("8. Salir");
-        System.out.print("Elige una opción: ");
+        System.out.print("Elige una opcion: ");
     }
 
     // Crea una nueva nota a partir de datos ingresados por el usuario
     private static void createNote() {
         System.out.println("\n--- Crear una nueva nota ---");
-        System.out.print("Título: "); var title = scanner.nextLine();
+        System.out.print("Titulo: "); var title = scanner.nextLine();
         System.out.print("Contenido: "); var content = scanner.nextLine();
         System.out.print("Latitud: "); var lat = Double.parseDouble(scanner.nextLine());
         System.out.print("Longitud: "); var lon = Double.parseDouble(scanner.nextLine());
@@ -76,7 +78,7 @@ public class GeoNotes {
             // Se crea la nota con un ID único, fecha actual e inicialmente sin adjunto
             var note = new Note(noteCounter++, title, content, geoPoint, Instant.now(), null);
             timeline.addNote(note); // Guardar en el timeline
-            System.out.println("✅ Nota creada con éxito.");
+            System.out.println("✅ Nota creada con exito.");
         } catch (NumberFormatException e) {
             System.out.println("❌ Entrada no válida. Por favor, ingresa un número.");
         } catch (IllegalArgumentException e) {
@@ -94,7 +96,7 @@ public class GeoNotes {
         }
         // Recorre el mapa de notas e imprime ID, título y contenido
         timeline.getNotes().forEach(
-                (id, note) -> System.out.printf("ID: %d | Título: %s | Contenido: %s%n", id, note.title(), note.content())
+                (id, note) -> System.out.printf("ID: %d | Titulo: %s | Contenido: %s%n", id, note.title(), note.content())
         );
     }
 
@@ -141,24 +143,27 @@ public class GeoNotes {
     private static void ShowMd() {
         if (timeline.getNotes().isEmpty()) {
             System.out.println("No hay Md creados.");
-            return;
+        } else {
+            Note nota = timeline.getNote(noteCounter - 1);
+            if (nota == null) {
+                System.out.println("No hay una nota reciente para exportar.");
+                return;
+            }
+            MarkdownExporter objetoMd = new MarkdownExporter(nota, nota.location());
+            System.out.println("Md: " + objetoMd.export());
         }
-        // ⚠️ Aquí parece que hay un error: usa noteCounter en lugar de un ID válido
-        Note nota = timeline.getNote(noteCounter);
-        MarkdownExporter objetoMd = new MarkdownExporter(nota, nota.location());
-        System.out.println("Md: " + objetoMd.export());
     }
 
-    // Determina en qué región se encuentra un punto geográfico
-    private static void where() {
-        try {
-            System.out.println("Introduce latitud: ");
-            double lat = Double.parseDouble(scanner.nextLine());
-            System.out.println("Introduce longitud: ");
-            double lon = Double.parseDouble(scanner.nextLine());
 
-            var ubicacion = Match.where(new GeoPoint(lat, lon));
-            System.out.println("Ubicacion: " + ubicacion);
+    // Determina en qué región se encuentra un punto geográfico
+    private static void where(Timeline timeline, Scanner scanner) {
+        try {
+            System.out.print("Introduce el número de notas a listar: ");
+            int n = Integer.parseInt(scanner.nextLine());
+
+            var latestNotes = timeline.latest(n);
+            latestNotes.forEach(note ->
+                    System.out.println("- " + note.title() + " (" + note.createdAt() + ")"));
         } catch (NumberFormatException e) {
             System.out.println("❌ Entrada no válida. Por favor, ingresa un número.");
         }
