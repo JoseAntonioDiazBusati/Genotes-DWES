@@ -141,16 +141,21 @@ public class GeoNotes {
 
     // Exporta una nota en formato Markdown
     private static void ShowMd() {
+        // Comprueba si la colección de notas está vacía
+        // Esto evita intentar exportar cuando no hay notas registradas
         if (timeline.getNotes().isEmpty()) {
-            System.out.println("No hay Md creados.");
+            // Informa al usuario que no existen notas para exportar a Markdown
+            System.out.println("No hay notas para exportar a Markdown.");
         } else {
-            Note nota = timeline.getNote(noteCounter - 1);
-            if (nota == null) {
-                System.out.println("No hay una nota reciente para exportar.");
-                return;
-            }
-            MarkdownExporter objetoMd = new MarkdownExporter(nota, nota.location());
-            System.out.println("Md: " + objetoMd.export());
+            // Si hay notas, recorre todas las notas almacenadas en el timeline
+            timeline.getNotes().values().forEach(nota -> {
+                // Crea una instancia de MarkdownExporter para generar la versión Markdown
+                // de la nota y su ubicación geográfica
+                MarkdownExporter objetoMd = new MarkdownExporter(nota, nota.location());
+                
+                // Muestra en consola el texto Markdown generado para la nota actual
+                System.out.println("Md:\n" + objetoMd.export());
+            });
         }
     }
 
